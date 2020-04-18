@@ -1,0 +1,8 @@
+#!/bin/bash
+
+TERRAFORM_LATEST_VERSION=`curl -s https://releases.hashicorp.com/terraform/ | grep /terraform/ | perl -wp -e 's!.+/terraform/(.+?)/.+!$1!' | head -n 1`
+
+echo "install Terraform ${TERRAFORM_LATEST_VERSION}"
+
+curl -s -L https://releases.hashicorp.com/terraform/${TERRAFORM_LATEST_VERSION}/terraform_${TERRAFORM_LATEST_VERSION}_linux_amd64.zip | sudo busybox unzip -d /usr/local/bin -
+sudo chmod a+x /usr/local/bin/terraform

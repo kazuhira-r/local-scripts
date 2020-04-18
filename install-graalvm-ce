@@ -1,0 +1,45 @@
+#!/bin/bash
+
+GRAALVM_CE_VERSION=$1
+
+if [ "${GRAALVM_CE_VERSION}" == "" ]; then
+    echo "usage: $0 [GraalVM CE Version]"
+    echo "  example version: 19.0.0, 1.0.0-rc16"
+    exit 1
+fi
+
+INSTALL_BASE_DIR=/usr/local
+INSTALL_DIR=${INSTALL_BASE_DIR}/graalvm-ce
+JDK_VERSION=java11
+
+echo ${GRAALVM_CE_VERSION} | grep 1.0.0-rc > /dev/null
+
+if [ $? != 0 ]; then
+    IS_GA=1
+    GRAALVM_CE_URL=https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-${GRAALVM_CE_VERSION}/graalvm-ce-${JDK_VERSION}-linux-amd64-${GRAALVM_CE_VERSION}.tar.gz
+    #GRAALVM_CE_URL=https://github.com/oracle/graal/releases/download/vm-${GRAALVM_CE_VERSION}/graalvm-ce-linux-amd64-${GRAALVM_CE_VERSION}.tar.gz
+else
+    IS_GA=0
+    GRAALVM_CE_URL=https://github.com/oracle/graal/releases/download/vm-${GRAALVM_CE_VERSION}/graalvm-ce-${GRAALVM_CE_VERSION}-linux-amd64.tar.gz
+fi
+
+if [ -e ${INSTALL_DIR} ]; then
+    echo 'cleaning, before installed GraalVM CE...'
+    echo "rm -rf ${INSTALL_DIR}"
+    sudo rm -rf ${INSTALL_DIR}
+fi
+
+echo "downloading GraalVM CE ${JDK_VERSION}-${GRAALVM_CE_VERSION}..."
+
+wget -q ${GRAALVM_CE_URL} -O - | sudo tar zxf - -C ${INSTALL_BASE_DIR}
+
+echo "mv ${INSTALL_BASE_DIR}/graalvm-ce-${JDK_VERSION}-${GRAALVM_CE_VERSION} ${INSTALL_DIR}"
+sudo mv ${INSTALL_BASE_DIR}/graalvm-ce-${JDK_VERSION}-${GRAALVM_CE_VERSION} ${INSTALL_DIR}
+
+if [ $IS_GA == 1 ]; then
+    sudo ${INSTALL_DIR}/bin/gu install native-image
+fi
+
+${INSTALL_DIR}/bin/native-image --version
+
+echo "installed GraalVM CE ${JDK_VERSION}-${GRAALVM_CE_VERSION}!!"

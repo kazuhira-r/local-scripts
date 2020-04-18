@@ -1,0 +1,17 @@
+#!/bin/bash
+
+JDK_VERSION=$1
+
+if [ "${JDK_VERSION}" == "" ]; then
+    echo "$0 [use JDK version, ex. 8, 11 or graal]"
+    exit 1
+fi
+
+if [ "${JDK_VERSION}" == "graal" ]; then
+    TARGET_PATH=/usr/local/graalvm-ce
+else
+    TARGET_PATH=/usr/lib/jvm/java-${JDK_VERSION}-openjdk-amd64
+fi
+
+sudo unlink /usr/lib/jvm/default
+sudo ln -s ${TARGET_PATH}  /usr/lib/jvm/default
