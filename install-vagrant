@@ -1,6 +1,26 @@
 #!/bin/bash
 
 VAGRANT_VERSION=$1
+
+if [ "${VAGRANT_VERSION}" == "" ]; then
+    echo 'required argument [version]'
+    echo '  ex. 2.2.9'
+    exit 1
+fi
+
+echo "downloading ${VAGRANT_VERSION}..."
 curl -s -L https://releases.hashicorp.com/vagrant/${VAGRANT_VERSION}/vagrant_${VAGRANT_VERSION}_x86_64.deb -o /tmp/vagrant_${VAGRANT_VERSION}_x86_64.deb
+
+echo
+
+echo "installing ${VAGRANT_VERSION}..."
 sudo dpkg -i /tmp/vagrant_${VAGRANT_VERSION}_x86_64.deb
 rm /tmp/vagrant_${VAGRANT_VERSION}_x86_64.deb
+
+echo
+
+echo "finish!!"
+
+echo
+
+vagrant version
