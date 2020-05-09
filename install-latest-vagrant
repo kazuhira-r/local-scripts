@@ -1,0 +1,21 @@
+#!/bin/bash
+
+VAGRANT_LATEST_VERSION=`curl -s https://www.vagrantup.com/downloads.html | grep 'data-version="' | perl -wp -e 's!.+ data-version="([^"]+)" .+!$1!' | head -n 1
+`
+
+echo "downloading ${VAGRANT_LATEST_VERSION}..."
+curl -s -L https://releases.hashicorp.com/vagrant/${VAGRANT_LATEST_VERSION}/vagrant_${VAGRANT_LATEST_VERSION}_x86_64.deb -o /tmp/vagrant_${VAGRANT_LATEST_VERSION}_x86_64.deb
+
+echo
+
+echo "installing ${VAGRANT_LATEST_VERSION}..."
+sudo dpkg -i /tmp/vagrant_${VAGRANT_LATEST_VERSION}_x86_64.deb
+rm /tmp/vagrant_${VAGRANT_LATEST_VERSION}_x86_64.deb
+
+echo
+
+echo "finish!!"
+
+echo
+
+vagrant version
