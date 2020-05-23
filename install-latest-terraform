@@ -4,5 +4,8 @@ TERRAFORM_LATEST_VERSION=`curl -s https://releases.hashicorp.com/terraform/ | gr
 
 echo "install Terraform ${TERRAFORM_LATEST_VERSION}"
 
-curl -s -L https://releases.hashicorp.com/terraform/${TERRAFORM_LATEST_VERSION}/terraform_${TERRAFORM_LATEST_VERSION}_linux_amd64.zip | sudo busybox unzip -d /usr/local/bin -
+sudo curl -s -L -o /usr/local/bin/terraform_${TERRAFORM_LATEST_VERSION}_linux_amd64.zip https://releases.hashicorp.com/terraform/${TERRAFORM_LATEST_VERSION}/terraform_${TERRAFORM_LATEST_VERSION}_linux_amd64.zip
+cd /usr/local/bin
+sudo unzip -o terraform_${TERRAFORM_LATEST_VERSION}_linux_amd64.zip
+sudo rm /usr/local/bin/terraform_${TERRAFORM_LATEST_VERSION}_linux_amd64.zip
 sudo chmod a+x /usr/local/bin/terraform
