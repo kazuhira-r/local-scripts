@@ -1,0 +1,28 @@
+#!/bin/bash
+
+UNIT=G
+
+while getopts kmg OPTION
+do
+    case ${OPTION} in
+        k)
+            UNIT=K;;
+        m)
+            UNIT=M;;
+        g)
+            UNIT=G;;
+        \?)
+            exit1;;
+    esac
+done
+
+if [ "${UNIT}" == "K" ]; then
+    ps auxh | perl -wnl -a -e 'print "$F[5] $F[10]"' | perl -wnl -a -e 'BEGIN { %sum = (); } $sum{$F[1]} += $F[0]; END { foreach my $p (keys(%sum)) { print sprintf("%s = %d KB", $p, $sum{$p}); } }' | sort -k 3 -n
+elif [ "${UNIT}" == "M" ]; then
+    ps auxh | perl -wnl -a -e 'print "$F[5] $F[10]"' | perl -wnl -a -e 'BEGIN { %sum = (); } $sum{$F[1]} += $F[0]; END { foreach my $p (keys(%sum)) { print sprintf("%s = %.2f MB", $p, $sum{$p} / 1024); } }' | sort -k 3 -n
+elif [ "${UNIT}" == "G" ]; then
+    ps auxh | perl -wnl -a -e 'print "$F[5] $F[10]"' | perl -wnl -a -e 'BEGIN { %sum = (); } $sum{$F[1]} += $F[0]; END { foreach my $p (keys(%sum)) { print sprintf("%s = %.2f GB", $p, $sum{$p} / 1024 / 1024); } }' | sort -k 3 -n
+else
+    ps auxh | perl -wnl -a -e 'print "$F[5] $F[10]"' | perl -wnl -a -e 'BEGIN { %sum = (); } $sum{$F[1]} += $F[0]; END { foreach my $p (keys(%sum)) { print sprintf("%s = %.2f GB", $p, $sum{$p} / 1024 / 1024); } }' | sort -k 3 -n
+fi
+
