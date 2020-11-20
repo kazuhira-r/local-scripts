@@ -1,6 +1,6 @@
 #!/bin/bash
 
-VAGRANT_LATEST_VERSION=`curl -s https://raw.githubusercontent.com/hashicorp/vagrant/master/CHANGELOG.md | grep '##' | head -n 2 | tail -n 1 | perl -wanl -e 'print $F[1]'`
+VAGRANT_LATEST_VERSION=`curl -s https://api.github.com/repos/hashicorp/vagrant/tags | jq -r .[].name | head -n 1 | perl -wp -e 's!^v!!'`
 
 echo "downloading ${VAGRANT_LATEST_VERSION}..."
 curl -s -L https://releases.hashicorp.com/vagrant/${VAGRANT_LATEST_VERSION}/vagrant_${VAGRANT_LATEST_VERSION}_x86_64.deb -o /tmp/vagrant_${VAGRANT_LATEST_VERSION}_x86_64.deb

@@ -1,6 +1,6 @@
 #!/bin/bash
 
-TERRAFORM_LATEST_VERSION=`curl -s https://www.terraform.io/downloads.html | grep linux_amd64 | perl -wp -e 's!.+".+/terraform/(.+?)/terraform.+!$1!' | head -n 1`
+TERRAFORM_LATEST_VERSION=`curl -s https://api.github.com/repos/hashicorp/terraform/releases/latest | jq -r .tag_name | perl -wp -e 's!^v!!'`
 
 echo "install Terraform ${TERRAFORM_LATEST_VERSION}"
 
