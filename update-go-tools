@@ -1,0 +1,16 @@
+#!/bin/bash
+
+TOOLS=(
+    golang.org/x/tools/gopls@latest
+    github.com/motemen/gore/cmd/gore
+    github.com/mdempsky/gocode
+)
+
+cd /tmp
+
+for TOOL in "${TOOLS[@]}"
+do
+    echo "update [${TOOL}] ..."
+    GO111MODULE=on go get -u ${TOOL}
+    echo
+done
