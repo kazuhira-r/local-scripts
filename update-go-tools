@@ -4,6 +4,7 @@ TOOLS=(
     golang.org/x/tools/gopls@latest
     github.com/motemen/gore/cmd/gore
     github.com/mdempsky/gocode
+    github.com/go-delve/delve/cmd/dlv
 )
 
 cd /tmp
