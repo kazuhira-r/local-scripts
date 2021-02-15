@@ -2,10 +2,20 @@
 
 TERRAFORM_LATEST_VERSION=`curl -s https://api.github.com/repos/hashicorp/terraform/releases/latest | jq -r .tag_name | perl -wp -e 's!^v!!'`
 
-echo "install Terraform ${TERRAFORM_LATEST_VERSION}"
+echo 'current Terraform version'
+terraform version
+
+echo
+
+echo "downloading Terraform ${TERRAFORM_LATEST_VERSION}..."
 
 sudo curl -s -L -o /usr/local/bin/terraform_${TERRAFORM_LATEST_VERSION}_linux_amd64.zip https://releases.hashicorp.com/terraform/${TERRAFORM_LATEST_VERSION}/terraform_${TERRAFORM_LATEST_VERSION}_linux_amd64.zip
 cd /usr/local/bin
 sudo unzip -o terraform_${TERRAFORM_LATEST_VERSION}_linux_amd64.zip
 sudo rm /usr/local/bin/terraform_${TERRAFORM_LATEST_VERSION}_linux_amd64.zip
 sudo chmod a+x /usr/local/bin/terraform
+
+echo
+
+echo 'installed Terraform version'
+terraform version

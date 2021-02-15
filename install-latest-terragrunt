@@ -3,7 +3,6 @@
 TERRAGRUNT_LATEST_VERSION=`curl -s https://api.github.com/repos/gruntwork-io/terragrunt/releases/latest | jq -r .tag_name`
 
 echo 'current Terragrunt version'
-
 terragrunt -version
 
 echo
@@ -16,5 +15,4 @@ sudo chmod a+x /usr/local/bin/terragrunt
 echo
 
 echo 'installed Terragrunt version'
-
 terragrunt -version
