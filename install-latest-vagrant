@@ -2,6 +2,9 @@
 
 VAGRANT_LATEST_VERSION=`curl -s https://api.github.com/repos/hashicorp/vagrant/tags | jq -r .[].name | head -n 1 | perl -wp -e 's!^v!!'`
 
+echo 'current Vagrant version'
+vagrant version
+
 echo "downloading ${VAGRANT_LATEST_VERSION}..."
 curl -s -L https://releases.hashicorp.com/vagrant/${VAGRANT_LATEST_VERSION}/vagrant_${VAGRANT_LATEST_VERSION}_x86_64.deb -o /tmp/vagrant_${VAGRANT_LATEST_VERSION}_x86_64.deb
 
@@ -13,8 +16,5 @@ rm /tmp/vagrant_${VAGRANT_LATEST_VERSION}_x86_64.deb
 
 echo
 
-echo "finish!!"
-
-echo
-
+echo 'installed Vagrant version'
 vagrant version
