@@ -1,0 +1,32 @@
+#!/bin/bash
+
+npm init -y
+npm i -D typescript
+npm i -D -E prettier
+
+perl -wp -i -e 's!    "test": .+!    "build": "tsc",\n    "test": "jest",\n    "format": "prettier --write src test"!' package.json
+
+echo '{
+  "compilerOptions": {
+    "target": "esnext",
+    "module": "commonjs",
+    "baseUrl": "./src",
+    "outDir": "dist",
+    "strict": true,
+    "noImplicitAny": true,
+    "forceConsistentCasingInFileNames": true,
+    "esModuleInterop": true,      
+    "sourceMap": true,
+    "skipLibCheck": true
+  },
+  "include": [
+    "src"
+  ]
+}' > tsconfig.json
+
+echo {} > .prettierrc.json
+
+npm i -D jest @types/jest ts-jest
+npx ts-jest config:init
+
+mkdir src test
