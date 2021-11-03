@@ -30,3 +30,52 @@ npm i -D jest @types/jest ts-jest
 npx ts-jest config:init
 
 mkdir src test
+
+echo '
+### versions
+'
+
+echo 'typescript:'
+npx tsc --version
+
+echo
+
+echo 'prettier:'
+npx prettier --version
+
+echo
+
+echo 'jest:'
+npx jest --version
+
+echo '
+### settings
+'
+
+echo 'package.json:'
+echo
+cat package.json
+
+echo
+echo 'tsconfig.json:'
+echo
+cat tsconfig.json
+
+echo
+echo 'jest.config.js:'
+echo
+cat jest.config.js
+
+echo
+
+echo '
+### executed commands.
+
+$ npm init -y
+$ npm i -D typescript
+$ npm i -D -E prettier
+$ echo {} > .prettierrc.json
+$ npm i -D jest @types/jest ts-jest
+$ npx ts-jest config:init
+$ mkdir src test
+'

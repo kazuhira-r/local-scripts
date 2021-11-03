@@ -27,3 +27,38 @@ echo '{
 echo {} > .prettierrc.json
 
 mkdir src
+
+echo '
+### versions
+'
+
+echo 'typescript:'
+npx tsc --version
+
+echo
+
+echo 'prettier:'
+npx prettier --version
+
+echo
+
+echo '### settings'
+
+echo 'package.json:'
+echo
+cat package.json
+
+echo
+echo 'tsconfig.json:'
+echo
+cat tsconfig.json
+
+echo '
+### executed commands.
+
+$ npm init -y
+$ npm i -D typescript
+$ npm i -D -E prettier
+$ echo {} > .prettierrc.json
+$ mkdir src
+'
