@@ -17,7 +17,8 @@ echo '{
     "noFallthroughCasesInSwitch": true,
     "noImplicitOverride": true,
     "noImplicitReturns": true,
-    "noPropertyAccessFromIndexSignature": true
+    "noPropertyAccessFromIndexSignature": true,
+    "esModuleInterop": true
   },
   "include": [
     "src"
