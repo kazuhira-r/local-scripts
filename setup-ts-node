@@ -1,10 +1,51 @@
 #!/bin/bash
 
+SCRIPT_NAME=$0
+
+usage() {
+    cat <<EOF
+Usage: ${SCRIPT_NAME} [options...]
+  options:
+    -t ... enable test
+EOF
+}
+
+TEST_ENABLED=0
+
+while getopts ht OPTION
+do
+    case ${OPTION} in
+        t)
+            echo 'enabled [test option]'
+            TEST_ENABLED=1
+            ;;
+        h)
+            usage
+            exit 0
+            ;;
+        \?)
+           usage
+           exit 1
+           ;;
+    esac
+done
+
 npm init -y
 npm i -D typescript
 npm i -D -E prettier
 
-perl -wp -i -e 's!    "test": .+!    "build": "tsc",\n    "format": "prettier --write src"!' package.json
+SCRIPTS=''
+
+SCRIPTS="${SCRIPTS}"'    "build": "tsc"'
+SCRIPTS="${SCRIPTS}"',\n'
+SCRIPTS="${SCRIPTS}"'    "format": "prettier --write src"'
+
+if [ ${TEST_ENABLED} -eq 1 ]; then
+    SCRIPTS="${SCRIPTS}"',\n'
+    SCRIPTS="${SCRIPTS}"'    "test": "jest"'
+fi
+
+perl -wp -i -e 's!    "test": .+!'"${SCRIPTS}"'!' package.json
 
 echo '{
   "compilerOptions": {
@@ -29,7 +70,16 @@ echo '{
   "singleQuote": true
 }' > .prettierrc.json
 
+if [ ${TEST_ENABLED} -eq 1 ]; then
+    npm i -D jest @types/jest ts-jest
+    npx ts-jest config:init
+fi
+
 mkdir src
+
+if [ ${TEST_ENABLED} -eq 1 ]; then
+    mkdir test
+fi
 
 echo '
 ### versions
@@ -43,24 +93,28 @@ echo
 echo 'prettier:'
 npx prettier --version
 
-echo
 
-echo '### settings'
+if [ ${TEST_ENABLED} -eq 1 ]; then
+    echo
 
-echo 'package.json:'
-echo
-cat package.json
-
-echo
-echo 'tsconfig.json:'
-echo
-cat tsconfig.json
+    echo 'jest:'
+    npx jest --version
+fi
 
 echo '
 ### executed commands.
 
 $ npm init -y
 $ npm i -D typescript
-$ npm i -D -E prettier
-$ mkdir src
-'
+$ npm i -D -E prettier'
+
+if [ ${TEST_ENABLED} -eq 1 ]; then
+    echo '$ npm i -D jest @types/jest ts-jest
+$ npx ts-jest config:init'
+fi
+
+if [ ${TEST_ENABLED} -eq 1 ]; then
+    echo '$ mkdir src test'
+else
+    echo '$ mkdir src'
+fi
