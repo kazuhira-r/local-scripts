@@ -25,7 +25,9 @@ echo '{
   ]
 }' > tsconfig.json
 
-echo {} > .prettierrc.json
+echo '{
+  "singleQuote": true
+}' > .prettierrc.json
 
 npm i -D jest @types/jest ts-jest
 npx ts-jest config:init

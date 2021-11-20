@@ -25,7 +25,9 @@ echo '{
   ]
 }' > tsconfig.json
 
-echo {} > .prettierrc.json
+echo '{
+  "singleQuote": true
+}' > .prettierrc.json
 
 mkdir src
 
