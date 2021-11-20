@@ -77,7 +77,6 @@ echo '
 $ npm init -y
 $ npm i -D typescript
 $ npm i -D -E prettier
-$ echo {} > .prettierrc.json
 $ npm i -D jest @types/jest ts-jest
 $ npx ts-jest config:init
 $ mkdir src test
