@@ -6,15 +6,21 @@ usage() {
     cat <<EOF
 Usage: ${SCRIPT_NAME} [options...]
   options:
+    -l ... enable live reload
     -t ... enable test
 EOF
 }
 
+LIVE_RELOAD_ENABLED=0
 TEST_ENABLED=0
 
-while getopts ht OPTION
+while getopts hlt OPTION
 do
     case ${OPTION} in
+        l)
+            echo 'enabled [live reload option]'
+            LIVE_RELOAD_ENABLED=1
+            ;;
         t)
             echo 'enabled [test option]'
             TEST_ENABLED=1
@@ -37,6 +43,14 @@ npm i -D -E prettier
 SCRIPTS=''
 
 SCRIPTS="${SCRIPTS}"'    "build": "tsc"'
+SCRIPTS="${SCRIPTS}"',\n'
+SCRIPTS="${SCRIPTS}"'    "build:watch": "tsc --watch"'
+
+if [ ${LIVE_RELOAD_ENABLED} -eq 1 ]; then
+    SCRIPTS="${SCRIPTS}"',\n'
+    SCRIPTS="${SCRIPTS}"'    "build:live": "nodemon --watch '\''src/**/*.ts'\'' --exec '\''ts-node'\'' src/index.ts"'
+fi
+
 SCRIPTS="${SCRIPTS}"',\n'
 SCRIPTS="${SCRIPTS}"'    "format": "prettier --write src"'
 
@@ -70,6 +84,10 @@ echo '{
   "singleQuote": true
 }' > .prettierrc.json
 
+if [ ${LIVE_RELOAD_ENABLED} -eq 1 ]; then
+    npm i -D nodemon ts-node
+fi
+
 if [ ${TEST_ENABLED} -eq 1 ]; then
     npm i -D jest @types/jest ts-jest
     npx ts-jest config:init
@@ -94,6 +112,18 @@ echo 'prettier:'
 npx prettier --version
 
 
+if [ ${LIVE_RELOAD_ENABLED} -eq 1 ]; then
+    echo
+
+    echo 'nodemon:'
+    npx nodemon --version
+
+    echo
+
+    echo 'ts-node:'
+    npx ts-node --version
+fi
+
 if [ ${TEST_ENABLED} -eq 1 ]; then
     echo
 
@@ -107,6 +137,10 @@ echo '
 $ npm init -y
 $ npm i -D typescript
 $ npm i -D -E prettier'
+
+if [ ${LIVE_RELOAD_ENABLED} -eq 1 ]; then
+    echo '$ npm i -D nodemon ts-node'
+fi
 
 if [ ${TEST_ENABLED} -eq 1 ]; then
     echo '$ npm i -D jest @types/jest ts-jest
