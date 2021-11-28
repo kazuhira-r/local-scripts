@@ -42,9 +42,9 @@ npm i -D -E prettier
 
 SCRIPTS=''
 
-SCRIPTS="${SCRIPTS}"'    "build": "tsc"'
+SCRIPTS="${SCRIPTS}"'    "build": "tsc --project ."'
 SCRIPTS="${SCRIPTS}"',\n'
-SCRIPTS="${SCRIPTS}"'    "build:watch": "tsc --watch"'
+SCRIPTS="${SCRIPTS}"'    "build:watch": "tsc --project . --watch"'
 
 if [ ${LIVE_RELOAD_ENABLED} -eq 1 ]; then
     SCRIPTS="${SCRIPTS}"',\n'
