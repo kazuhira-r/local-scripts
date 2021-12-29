@@ -51,8 +51,13 @@ if [ ${LIVE_RELOAD_ENABLED} -eq 1 ]; then
     SCRIPTS="${SCRIPTS}"'    "build:live": "nodemon --watch '\''src/**/*.ts'\'' --exec '\''ts-node'\'' src/index.ts"'
 fi
 
-SCRIPTS="${SCRIPTS}"',\n'
-SCRIPTS="${SCRIPTS}"'    "format": "prettier --write src"'
+if [ ${TEST_ENABLED} -eq 1 ]; then
+    SCRIPTS="${SCRIPTS}"',\n'
+    SCRIPTS="${SCRIPTS}"'    "format": "prettier --write src test"'
+else
+    SCRIPTS="${SCRIPTS}"',\n'
+    SCRIPTS="${SCRIPTS}"'    "format": "prettier --write src"'
+fi
 
 if [ ${TEST_ENABLED} -eq 1 ]; then
     SCRIPTS="${SCRIPTS}"',\n'
