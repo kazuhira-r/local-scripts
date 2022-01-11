@@ -46,9 +46,16 @@ SCRIPTS="${SCRIPTS}"'    "build": "tsc --project ."'
 SCRIPTS="${SCRIPTS}"',\n'
 SCRIPTS="${SCRIPTS}"'    "build:watch": "tsc --project . --watch"'
 
-if [ ${LIVE_RELOAD_ENABLED} -eq 1 ]; then
+if [ ${TEST_ENABLED} -eq 1 ]; then
     SCRIPTS="${SCRIPTS}"',\n'
-    SCRIPTS="${SCRIPTS}"'    "build:live": "nodemon --watch '\''src/**/*.ts'\'' --exec '\''ts-node'\'' src/index.ts"'
+    SCRIPTS="${SCRIPTS}"'    "typecheck": "tsc --project ./tsconfig-typecheck-only.conf"'
+    SCRIPTS="${SCRIPTS}"',\n'
+    SCRIPTS="${SCRIPTS}"'    "typecheck:watch": "tsc --project ./tsconfig-typecheck-only.conf --watch"'
+fi
+
+if [ ${TEST_ENABLED} -eq 1 ]; then
+    SCRIPTS="${SCRIPTS}"',\n'
+    SCRIPTS="${SCRIPTS}"'    "test": "jest"'
 fi
 
 if [ ${TEST_ENABLED} -eq 1 ]; then
@@ -85,6 +92,19 @@ echo '{
   ]
 }' > tsconfig.json
 
+if [ ${TEST_ENABLED} -eq 1 ]; then
+    echo '{
+  "extends": "./tsconfig",
+  "compilerOptions": {
+    "baseUrl": "./",
+    "noEmit": true
+  },
+  "include": [
+    "src", "test"
+  ]
+}' > tsconfig-typecheck-only.conf
+fi
+
 echo '{
   "singleQuote": true
 }' > .prettierrc.json
@@ -94,8 +114,15 @@ if [ ${LIVE_RELOAD_ENABLED} -eq 1 ]; then
 fi
 
 if [ ${TEST_ENABLED} -eq 1 ]; then
-    npm i -D jest @types/jest ts-jest
-    npx ts-jest config:init
+    npm i -D jest @types/jest
+    npm i -D esbuild esbuild-jest
+
+    echo 'module.exports = {
+  testEnvironment: '"'"'node'"'"',
+  transform: {
+    "^.+\\.tsx?$": "esbuild-jest"
+  }
+};' > jest.config.js
 fi
 
 mkdir src
@@ -148,8 +175,8 @@ if [ ${LIVE_RELOAD_ENABLED} -eq 1 ]; then
 fi
 
 if [ ${TEST_ENABLED} -eq 1 ]; then
-    echo '$ npm i -D jest @types/jest ts-jest
-$ npx ts-jest config:init'
+    echo '$ npm i -D jest @types/jest
+$ npm i -D npm i -D esbuild esbuild-jest'
 fi
 
 if [ ${TEST_ENABLED} -eq 1 ]; then
