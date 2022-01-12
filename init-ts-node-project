@@ -48,9 +48,9 @@ SCRIPTS="${SCRIPTS}"'    "build:watch": "tsc --project . --watch"'
 
 if [ ${TEST_ENABLED} -eq 1 ]; then
     SCRIPTS="${SCRIPTS}"',\n'
-    SCRIPTS="${SCRIPTS}"'    "typecheck": "tsc --project ./tsconfig-typecheck-only.conf"'
+    SCRIPTS="${SCRIPTS}"'    "typecheck": "tsc --project ./tsconfig.typecheck-only.conf"'
     SCRIPTS="${SCRIPTS}"',\n'
-    SCRIPTS="${SCRIPTS}"'    "typecheck:watch": "tsc --project ./tsconfig-typecheck-only.conf --watch"'
+    SCRIPTS="${SCRIPTS}"'    "typecheck:watch": "tsc --project ./tsconfig.typecheck-only.conf --watch"'
 fi
 
 if [ ${TEST_ENABLED} -eq 1 ]; then
@@ -102,7 +102,7 @@ if [ ${TEST_ENABLED} -eq 1 ]; then
   "include": [
     "src", "test"
   ]
-}' > tsconfig-typecheck-only.conf
+}' > tsconfig.typecheck-only.conf
 fi
 
 echo '{
