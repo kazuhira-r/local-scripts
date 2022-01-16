@@ -77,10 +77,10 @@ echo '{
   "compilerOptions": {
     "target": "esnext",
     "module": "commonjs",
+    "lib": ["esnext"],
     "baseUrl": "./src",
     "outDir": "dist",
     "strict": true,
-    "lib": ["esnext"],
     "forceConsistentCasingInFileNames": true,
     "noFallthroughCasesInSwitch": true,
     "noImplicitOverride": true,
