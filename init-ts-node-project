@@ -48,9 +48,9 @@ SCRIPTS="${SCRIPTS}"'    "build:watch": "tsc --project . --watch"'
 
 if [ ${TEST_ENABLED} -eq 1 ]; then
     SCRIPTS="${SCRIPTS}"',\n'
-    SCRIPTS="${SCRIPTS}"'    "typecheck": "tsc --project ./tsconfig.typecheck.conf"'
+    SCRIPTS="${SCRIPTS}"'    "typecheck": "tsc --project ./tsconfig.typecheck.json"'
     SCRIPTS="${SCRIPTS}"',\n'
-    SCRIPTS="${SCRIPTS}"'    "typecheck:watch": "tsc --project ./tsconfig.typecheck.conf --watch"'
+    SCRIPTS="${SCRIPTS}"'    "typecheck:watch": "tsc --project ./tsconfig.typecheck.json --watch"'
 fi
 
 if [ ${TEST_ENABLED} -eq 1 ]; then
@@ -103,7 +103,7 @@ if [ ${TEST_ENABLED} -eq 1 ]; then
   "include": [
     "src", "test"
   ]
-}' > tsconfig.typecheck.conf
+}' > tsconfig.typecheck.json
 fi
 
 echo '{
