@@ -177,7 +177,7 @@ fi
 
 if [ ${TEST_ENABLED} -eq 1 ]; then
     echo '$ npm i -D jest @types/jest
-$ npm i -D npm i -D esbuild esbuild-jest'
+$ npm i -D esbuild esbuild-jest'
 fi
 
 if [ ${TEST_ENABLED} -eq 1 ]; then
