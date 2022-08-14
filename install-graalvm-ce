@@ -10,7 +10,7 @@ fi
 
 INSTALL_BASE_DIR=/usr/local
 INSTALL_DIR=${INSTALL_BASE_DIR}/graalvm-ce
-JDK_VERSION=java11
+JDK_VERSION=java17
 
 echo ${GRAALVM_CE_VERSION} | grep 1.0.0-rc > /dev/null
 
