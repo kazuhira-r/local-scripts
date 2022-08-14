@@ -169,7 +169,7 @@ echo '
 
 $ npm init -y
 $ npm i -D typescript
-$ npm i -D -E prettier'
+$ npm i -D prettier'
 
 if [ ${LIVE_RELOAD_ENABLED} -eq 1 ]; then
     echo '$ npm i -D nodemon ts-node'
