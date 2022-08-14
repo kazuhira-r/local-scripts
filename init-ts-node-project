@@ -38,7 +38,7 @@ done
 
 npm init -y
 npm i -D typescript
-npm i -D -E prettier
+npm i -D prettier
 
 SCRIPTS=''
 
