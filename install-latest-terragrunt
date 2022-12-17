@@ -1,6 +1,6 @@
 #!/bin/bash
 
-TERRAGRUNT_LATEST_VERSION=`curl -s https://api.github.com/repos/gruntwork-io/terragrunt/releases/latest | jq -r .tag_name`
+TERRAGRUNT_LATEST_VERSION=$(curl -s https://api.github.com/repos/gruntwork-io/terragrunt/releases/latest | jq -r .tag_name)
 
 echo 'current Terragrunt version'
 terragrunt -version

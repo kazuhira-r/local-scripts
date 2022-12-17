@@ -7,10 +7,10 @@ echo
 
 echo 'downloading...'
 
-sudo curl -sL "$(curl -Ls https://api.github.com/repos/terraform-linters/tflint/releases/latest | grep -o -E "https://.+?_linux_amd64.zip")" -o /usr/local/bin/tflint.zip && \
-    cd /usr/local/bin && \
-    sudo unzip -o tflint.zip && \
-    sudo rm tflint.zip
+sudo curl -sL "$(curl -Ls https://api.github.com/repos/terraform-linters/tflint/releases/latest | grep -o -E "https://.+?_linux_amd64.zip")" -o /usr/local/bin/tflint.zip \
+    && cd /usr/local/bin \
+    && sudo unzip -o tflint.zip \
+    && sudo rm tflint.zip
 
 sudo chmod a+x /usr/local/bin/tflint
 
