@@ -19,7 +19,7 @@ npm i -g --prefix ${TS_DIR} typescript typescript
 
 echo
 
-echo 'installed typescript-language-server version'
+echo 'installed typescript version'
 
 ${TS_DIR}/bin/tsc --version
 
