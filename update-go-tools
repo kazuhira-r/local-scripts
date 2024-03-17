@@ -12,6 +12,6 @@ cd /tmp
 for TOOL in "${TOOLS[@]}"
 do
     echo "update [${TOOL}] ..."
-    GO111MODULE=on go get -u ${TOOL}
+    go install ${TOOL}
     echo
 done
