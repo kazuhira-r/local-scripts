@@ -1,0 +1,62 @@
+#!/bin/bash
+
+## language server install functions
+
+function install-typescript-language-server() {
+    TS_SERVER_DIR=~/.emacs.d/.cache/lsp/npm/typescript-language-server
+    rm -rf ${TS_SERVER_DIR}
+    npm i -g --prefix ${TS_SERVER_DIR} typescript-language-server typescript
+
+    echo
+
+    echo 'installed typescript-language-server version'
+
+    ${TS_SERVER_DIR}/bin/typescript-language-server --version
+
+    echo
+
+    TS_DIR=~/.emacs.d/.cache/lsp/npm/typescript
+    rm -rf ${TSDIR}
+    npm i -g --prefix ${TS_DIR} typescript typescript
+
+    echo
+
+    echo 'installed typescript version'
+
+    ${TS_DIR}/bin/tsc --version
+
+    echo
+}
+
+function install-pyright() {
+    PYRIGHT_DIR=~/.emacs.d/.cache/lsp/npm/pyright
+    rm -rf ${PYRIGHT_DIR}
+    npm i -g --prefix ${PYRIGHT_DIR} pyright
+
+    echo
+
+    echo 'installed pyright version'
+
+    ${PYRIGHT_DIR}/bin/pyright --version
+
+    echo
+}
+
+function install-golsp() {
+    go install golang.org/x/tools/gopls@latest
+
+    echo 'installed gopls version'
+
+    gopls version
+
+    echo
+}
+
+
+## execute install language servers
+
+install-typescript-language-server
+
+install-pyright
+
+install-golsp

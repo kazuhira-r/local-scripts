@@ -1,7 +1,6 @@
 #!/bin/bash
 
 TOOLS=(
-    golang.org/x/tools/gopls@latest
     github.com/motemen/gore/cmd/gore@latest
     github.com/mdempsky/gocode@latest
     github.com/go-delve/delve/cmd/dlv@latest
