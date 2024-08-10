@@ -76,8 +76,8 @@ perl -wp -i -e 's!    "test": .+!'"${SCRIPTS}"'!' package.json
 echo '{
   "compilerOptions": {
     "target": "esnext",
-    "module": "commonjs",
-    "moduleResolution": "node",
+    "module": "nodenext",
+    "moduleResolution": "nodenext",
     "lib": ["esnext"],
     "baseUrl": "./src",
     "outDir": "dist",
@@ -96,7 +96,7 @@ echo '{
 
 if [ ${TEST_ENABLED} -eq 1 ]; then
     echo '{
-  "extends": "./tsconfig",
+  "extends": "./tsconfig.json",
   "compilerOptions": {
     "baseUrl": "./",
     "noEmit": true
