@@ -96,7 +96,7 @@ echo '{
 
 if [ ${TEST_ENABLED} -eq 1 ]; then
     echo '{
-  "extends": "./tsconfig.json",
+  "extends": "./tsconfig",
   "compilerOptions": {
     "baseUrl": "./",
     "noEmit": true
