@@ -103,7 +103,7 @@ if [ ${TEST_ENABLED} -eq 1 ]; then
     "noEmit": true
   },
   "include": [
-    "src", "test"
+    "src/**/*", "test/**/*"
   ]
 }' > tsconfig.typecheck.json
 fi
