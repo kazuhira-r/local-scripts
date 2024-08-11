@@ -87,6 +87,7 @@ echo '{
     "noImplicitOverride": true,
     "noImplicitReturns": true,
     "noPropertyAccessFromIndexSignature": true,
+    "skipLibCheck": true,
     "esModuleInterop": true
   },
   "include": [
