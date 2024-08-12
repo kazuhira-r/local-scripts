@@ -6,17 +6,23 @@ usage() {
     cat <<EOF
 Usage: ${SCRIPT_NAME} [options...]
   options:
+    -c ... set module type to CommonJS (default to ESM)
     -l ... enable live reload
     -t ... enable test
 EOF
 }
 
+COMMONJS_MODULE_TYPE_ENABLED=0
 LIVE_RELOAD_ENABLED=0
 TEST_ENABLED=0
 
-while getopts hlt OPTION
+while getopts chlt OPTION
 do
     case ${OPTION} in
+        c)
+            echo 'set module type to CommonJS'
+            COMMONJS_MODULE_TYPE_ENABLED=1
+            ;;
         l)
             echo 'enabled [live reload option]'
             LIVE_RELOAD_ENABLED=1
@@ -40,6 +46,10 @@ npm init -y
 npm i -D typescript
 npm i -D prettier
 
+if [ ${COMMONJS_MODULE_TYPE_ENABLED} -ne 1 ]; then
+    perl -wpi -e 's!^(  "main":.+)!$1  \n  "type": "module",!' package.json
+fi
+
 SCRIPTS=''
 
 SCRIPTS="${SCRIPTS}"'    "build": "tsc --project ."'
@@ -55,7 +65,9 @@ fi
 
 if [ ${TEST_ENABLED} -eq 1 ]; then
     SCRIPTS="${SCRIPTS}"',\n'
-    SCRIPTS="${SCRIPTS}"'    "test": "jest"'
+    SCRIPTS="${SCRIPTS}"'    "test": "vitest run"'
+    SCRIPTS="${SCRIPTS}"',\n'
+    SCRIPTS="${SCRIPTS}"'    "test:watch": "vitest watch"'
 fi
 
 if [ ${TEST_ENABLED} -eq 1 ]; then
@@ -64,11 +76,6 @@ if [ ${TEST_ENABLED} -eq 1 ]; then
 else
     SCRIPTS="${SCRIPTS}"',\n'
     SCRIPTS="${SCRIPTS}"'    "format": "prettier --write src"'
-fi
-
-if [ ${TEST_ENABLED} -eq 1 ]; then
-    SCRIPTS="${SCRIPTS}"',\n'
-    SCRIPTS="${SCRIPTS}"'    "test": "jest"'
 fi
 
 perl -wp -i -e 's!    "test": .+!'"${SCRIPTS}"'!' package.json
@@ -118,15 +125,14 @@ if [ ${LIVE_RELOAD_ENABLED} -eq 1 ]; then
 fi
 
 if [ ${TEST_ENABLED} -eq 1 ]; then
-    npm i -D jest @types/jest
-    npm i -D esbuild esbuild-jest
+    npm i -D vitest
 
-    echo 'module.exports = {
-  testEnvironment: '"'"'node'"'"',
-  transform: {
-    "^.+\\.tsx?$": "esbuild-jest"
-  }
-};' > jest.config.js
+    echo '/// <reference types="vitest" />
+import { defineConfig } from '"'"'vite'"'"';
+
+export default defineConfig({
+  test: { },
+});' > vite.config.ts
 fi
 
 mkdir src
@@ -163,8 +169,19 @@ fi
 if [ ${TEST_ENABLED} -eq 1 ]; then
     echo
 
-    echo 'jest:'
-    npx jest --version
+    echo 'vitest:'
+    npx vitest --version
+fi
+
+echo '
+'
+
+echo -n 'module type: '
+
+if [ ${COMMONJS_MODULE_TYPE_ENABLED} -ne 1 ]; then
+    echo 'ECMAScript Modules'
+else
+    echo 'CommonJS Modules'
 fi
 
 echo '
@@ -179,8 +196,7 @@ if [ ${LIVE_RELOAD_ENABLED} -eq 1 ]; then
 fi
 
 if [ ${TEST_ENABLED} -eq 1 ]; then
-    echo '$ npm i -D jest @types/jest
-$ npm i -D esbuild esbuild-jest'
+    echo '$ npm i -D vitest'
 fi
 
 if [ ${TEST_ENABLED} -eq 1 ]; then
