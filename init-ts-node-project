@@ -117,7 +117,7 @@ fi
 
 echo '{
   "singleQuote": true,
-  "printWidth": 120
+  "printWidth": 100
 }' > .prettierrc.json
 
 if [ ${LIVE_RELOAD_ENABLED} -eq 1 ]; then
