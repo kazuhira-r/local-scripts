@@ -32,6 +32,8 @@ function install-pyright() {
     PYRIGHT_DIR=~/.emacs.d/.cache/lsp/npm/pyright
     rm -rf ${PYRIGHT_DIR}
     npm i -g --prefix ${PYRIGHT_DIR} pyright
+    npm uninstall -g pyright
+    npm install -g pyright
 
     echo
 
