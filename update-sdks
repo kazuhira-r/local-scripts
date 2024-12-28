@@ -1,0 +1,34 @@
+#!/bin/bash
+
+SCRIPT_DIR=$(cd $(dirname $0) && pwd)
+
+## Java
+
+### sdkman
+echo 'update, sdkman and candidates'
+
+. ${HOME}/.sdkman/bin/sdkman-init.sh
+sdk update && sdk upgrade
+
+## Node.js
+
+### nvm
+echo 'update, nvm and Node.js LTS'
+
+cd ${HOME}/.nvm
+git pull origin && git fetch --prune
+cd -
+
+. ${HOME}/.nvm/nvm.sh
+
+nvm install --lts
+
+## Python
+
+### uv
+echo 'update uv' 
+uv self update
+
+## lap-mode language servers
+echo 'install language servers for lsp-mode'
+${SCRIPT_DIR}/install-latest-language-servers-for-lsp-mode
