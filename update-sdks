@@ -33,6 +33,16 @@ echo
 echo 'update uv' 
 uv self update
 
+## Rust
+
+### rustp
+echo 'update, rust toolchain and rustup self'
+
+rustup update
+rustup self update
+
+echo
+
 ## lap-mode language servers
 echo 'install language servers for lsp-mode'
 ${SCRIPT_DIR}/install-latest-language-servers-for-lsp-mode
