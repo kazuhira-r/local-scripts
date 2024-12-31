@@ -10,6 +10,8 @@ echo 'update, sdkman and candidates'
 . ${HOME}/.sdkman/bin/sdkman-init.sh
 sdk update && sdk upgrade
 
+echo
+
 ## Node.js
 
 ### nvm
@@ -23,6 +25,8 @@ cd -
 
 nvm install --lts
 
+echo
+
 ## Python
 
 ### uv
@@ -32,3 +36,5 @@ uv self update
 ## lap-mode language servers
 echo 'install language servers for lsp-mode'
 ${SCRIPT_DIR}/install-latest-language-servers-for-lsp-mode
+
+echo
