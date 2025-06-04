@@ -52,6 +52,20 @@ function install-golsp() {
     echo
 }
 
+function install-copilot-lsp() {
+    COPILOT_DIR=~/.emacs.d/.cache/copilot
+    rm -rf ${COPILOT_DIR}
+    npm i -g --prefix ${COPILOT_DIR} \@github/copilot-language-server
+
+    echo
+
+    echo 'installed copilot language server version'
+
+    ${COPILOT_DIR}/bin/copilot-language-server --version
+
+    echo
+}
+
 
 ## execute install language servers
 
@@ -60,3 +74,5 @@ install-typescript-language-server
 install-pyright
 
 install-golsp
+
+install-copilot-lsp
