@@ -75,4 +75,4 @@ install-pyright
 
 install-golsp
 
-install-copilot-lsp
+# install-copilot-lsp
