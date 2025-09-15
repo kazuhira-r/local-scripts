@@ -2,7 +2,19 @@
 
 ## language server install functions
 
-function install-typescript-language-server() {
+install-bash-language-server() {
+    BASH_SERVER_DIR=~/.emacs.d/.cache/lsp/npm/bash-language-server
+    rm -rf ${BASH_SERVER_DIR}
+    npm i -g --prefix ${BASH_SERVER_DIR} bash-language-server
+
+    echo
+
+    echo 'installed bash-language-server version'
+
+    ${BASH_SERVER_DIR}/bin/bash-language-server --version
+}
+
+install-typescript-language-server() {
     TS_SERVER_DIR=~/.emacs.d/.cache/lsp/npm/typescript-language-server
     rm -rf ${TS_SERVER_DIR}
     npm i -g --prefix ${TS_SERVER_DIR} typescript-language-server typescript
@@ -28,7 +40,7 @@ function install-typescript-language-server() {
     echo
 }
 
-function install-pyright() {
+install-pyright() {
     PYRIGHT_DIR=~/.emacs.d/.cache/lsp/npm/pyright
     rm -rf ${PYRIGHT_DIR}
     npm i -g --prefix ${PYRIGHT_DIR} pyright
@@ -42,7 +54,7 @@ function install-pyright() {
     echo
 }
 
-function install-golsp() {
+install-golsp() {
     go install golang.org/x/tools/gopls@latest
 
     echo 'installed gopls version'
@@ -52,7 +64,7 @@ function install-golsp() {
     echo
 }
 
-function install-copilot-lsp() {
+install-copilot-lsp() {
     COPILOT_DIR=~/.emacs.d/.cache/copilot
     rm -rf ${COPILOT_DIR}
     npm i -g --prefix ${COPILOT_DIR} \@github/copilot-language-server
@@ -68,6 +80,8 @@ function install-copilot-lsp() {
 
 
 ## execute install language servers
+
+install-bash-language-server
 
 install-typescript-language-server
 
