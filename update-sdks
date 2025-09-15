@@ -19,7 +19,7 @@ echo 'update, nvm and Node.js LTS'
 
 cd ${HOME}/.nvm
 git fetch --tags origin
-git checkout `git describe --abbrev=0 --tags --match "v[0-9]*" $(git rev-list --tags --max-count=1)`
+git checkout $(git describe --abbrev=0 --tags --match "v[0-9]*" $(git rev-list --tags --max-count=1))
 cd -
 
 . ${HOME}/.nvm/nvm.sh
@@ -31,7 +31,7 @@ echo
 ## Python
 
 ### uv
-echo 'update uv' 
+echo 'update uv'
 uv self update
 
 echo

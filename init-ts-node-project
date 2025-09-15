@@ -3,7 +3,7 @@
 SCRIPT_NAME=$0
 
 usage() {
-    cat <<EOF
+    cat << EOF
 Usage: ${SCRIPT_NAME} [options...]
   options:
     -c ... set module type to CommonJS (default to ESM)
@@ -16,29 +16,28 @@ COMMONJS_MODULE_TYPE_ENABLED=0
 LIVE_RELOAD_ENABLED=0
 TEST_ENABLED=0
 
-while getopts chlt OPTION
-do
+while getopts chlt OPTION; do
     case ${OPTION} in
-        c)
-            echo 'set module type to CommonJS'
-            COMMONJS_MODULE_TYPE_ENABLED=1
-            ;;
-        l)
-            echo 'enabled [live reload option]'
-            LIVE_RELOAD_ENABLED=1
-            ;;
-        t)
-            echo 'enabled [test option]'
-            TEST_ENABLED=1
-            ;;
-        h)
-            usage
-            exit 0
-            ;;
-        \?)
-           usage
-           exit 1
-           ;;
+    c)
+        echo 'set module type to CommonJS'
+        COMMONJS_MODULE_TYPE_ENABLED=1
+        ;;
+    l)
+        echo 'enabled [live reload option]'
+        LIVE_RELOAD_ENABLED=1
+        ;;
+    t)
+        echo 'enabled [test option]'
+        TEST_ENABLED=1
+        ;;
+    h)
+        usage
+        exit 0
+        ;;
+    \?)
+        usage
+        exit 1
+        ;;
     esac
 done
 
@@ -154,7 +153,6 @@ echo
 
 echo 'prettier:'
 npx prettier --version
-
 
 if [ ${LIVE_RELOAD_ENABLED} -eq 1 ]; then
     echo

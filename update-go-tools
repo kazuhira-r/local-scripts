@@ -8,8 +8,7 @@ TOOLS=(
 
 cd /tmp
 
-for TOOL in "${TOOLS[@]}"
-do
+for TOOL in "${TOOLS[@]}"; do
     echo "update [${TOOL}] ..."
     go install ${TOOL}
     echo

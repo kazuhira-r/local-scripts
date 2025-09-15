@@ -78,7 +78,6 @@ install-copilot-lsp() {
     echo
 }
 
-
 ## execute install language servers
 
 install-bash-language-server

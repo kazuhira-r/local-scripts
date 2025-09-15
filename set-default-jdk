@@ -14,4 +14,4 @@ else
 fi
 
 sudo unlink /usr/lib/jvm/default
-sudo ln -s ${TARGET_PATH}  /usr/lib/jvm/default
+sudo ln -s ${TARGET_PATH} /usr/lib/jvm/default
