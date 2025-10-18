@@ -1,4 +1,4 @@
 #!/bin/bash
 
 IMAGE_NAME=$(docker image ls --filter reference='kazuhira/duckdb:*' --format '{{.Repository}}:{{.Tag}}' | head -n 1)
-docker container run -it --rm -u $(id -u):$(id -g) -v $(pwd):/host --name duckdb-$(uuidgen) $IMAGE_NAME "$@"
+docker container run -it --rm -u $(id -u):$(id -g) -v $(pwd):/host --name duckdb-$(uuidgen) ${DOCKER_ARGS} $IMAGE_NAME "$@"
