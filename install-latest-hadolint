@@ -9,8 +9,8 @@ echo
 
 echo "downloading hadolint ${HADOLINT_LATEST_VERSION}..."
 
-sudo curl -s -o /usr/local/bin/hadolint -L https://github.com/hadolint/hadolint/releases/download/${HADOLINT_LATEST_VERSION}/hadolint-Linux-x86_64
-sudo chmod a+x /usr/local/bin/hadolint
+curl -s -o $HOME/.local/bin/hadolint -L https://github.com/hadolint/hadolint/releases/download/${HADOLINT_LATEST_VERSION}/hadolint-Linux-x86_64
+chmod a+x $HOME/.local/bin/hadolint
 
 echo
 

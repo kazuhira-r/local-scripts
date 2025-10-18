@@ -9,8 +9,8 @@ echo
 
 echo "downloading Terragrunt ${TERRAGRUNT_LATEST_VERSION}..."
 
-sudo curl -s -L https://github.com/gruntwork-io/terragrunt/releases/download/${TERRAGRUNT_LATEST_VERSION}/terragrunt_linux_amd64 -o /usr/local/bin/terragrunt
-sudo chmod a+x /usr/local/bin/terragrunt
+curl -s -L https://github.com/gruntwork-io/terragrunt/releases/download/${TERRAGRUNT_LATEST_VERSION}/terragrunt_linux_amd64 -o $HOME/.local/bin/terragrunt
+chmod a+x $HOME/.local/bin/terragrunt
 
 echo
 
