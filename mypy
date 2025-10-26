@@ -1,0 +1,5 @@
+#!/bin/bash
+
+IMAGE_NAME=$(docker image ls --filter=reference='kazuhira/mypy:*' --format '{{.Repository}}:{{.Tag}}' | head -n 1)
+
+docker container run -it --rm --name mypy -u $(id -u) -v $(pwd):/workspace -w /workspace ${IMAGE_NAME} "$@"
