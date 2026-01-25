@@ -1,0 +1,20 @@
+#!/bin/bash
+
+SCRIPT_DIR=$(cd $(dirname $0); pwd)
+
+${SCRIPT_DIR}/install-localize-ja
+
+echo "postfix postfix/main_mailer_type select No configuration" | sudo debconf-set-selections
+
+sudo DEBIAN_FRONTEND=noninteractive apt install -y \
+  ubuntu-desktop \
+  ibus-mozc \
+  tmux \
+  emacs \
+  fonts-cascadia-code \
+  xclip \
+  xsel
+
+sudo apt purge -y \
+  postfix \
+  mailutils

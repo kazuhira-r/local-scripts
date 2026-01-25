@@ -1,0 +1,10 @@
+#!/bin/bash
+
+SCRIPT_DIR=$(cd $(dirname $0); pwd)
+
+mkdir -p $HOME/.local/bin
+
+for SCRIPT in $(find $SCRIPT_DIR -type f | grep -Ev "$SCRIPT_DIR/(.git|LICENSE)"); do
+    FILE_NAME=$(basename $SCRIPT)
+    ln -s ${SCRIPT} $HOME/.local/bin/${FILE_NAME}
+done

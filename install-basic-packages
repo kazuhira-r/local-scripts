@@ -1,0 +1,15 @@
+#!/bin/bash
+
+SCRIPT_DIR=$(cd $(dirname $0); pwd)
+
+${SCRIPT_DIR}/update-os-packages
+
+sudo apt install -y \
+  bash-completion \
+  apt-file \
+  git \
+  zip \
+  unzip \
+  bash-completion \
+  curl \
+  ca-certificates
