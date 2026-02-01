@@ -9,6 +9,7 @@ echo "postfix postfix/main_mailer_type select No configuration" | sudo debconf-s
 sudo DEBIAN_FRONTEND=noninteractive apt install -y \
   ubuntu-desktop \
   ibus-mozc \
+  fcitx5-mozc \
   tmux \
   emacs \
   fonts-cascadia-code \
@@ -18,3 +19,7 @@ sudo DEBIAN_FRONTEND=noninteractive apt install -y \
 sudo apt purge -y \
   postfix \
   mailutils
+
+sudo apt install -y \
+  language-pack-gnome-ja \
+  $(check-language-support -l ja)
