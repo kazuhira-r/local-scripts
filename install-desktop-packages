@@ -23,3 +23,6 @@ sudo apt purge -y \
 sudo apt install -y \
   language-pack-gnome-ja \
   $(check-language-support -l ja)
+
+gsettings set org.gnome.desktop.wm.preferences button-layout ":minimize,maximize,close"
+gsettings set org.gnome.desktop.wm.keybindings switch-windows "['<Alt>Tab']"

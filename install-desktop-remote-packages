@@ -7,3 +7,5 @@ ${SCRIPT_DIR}/install-desktop-packages
 sudo apt install -y \
   tigervnc-standalone-server \
   dbus-x11
+
+gsettings set org.gnome.desktop.session idle-delay 0
