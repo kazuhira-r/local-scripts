@@ -12,4 +12,5 @@ sudo apt install -y \
   unzip \
   bash-completion \
   curl \
-  ca-certificates
+  ca-certificates \
+  build-essential
