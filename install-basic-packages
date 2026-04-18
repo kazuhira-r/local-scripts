@@ -16,3 +16,5 @@ sudo apt install -y \
   build-essential \
   python3-pip \
   python3-venv
+
+sudo chsh -s /bin/bash $USER
