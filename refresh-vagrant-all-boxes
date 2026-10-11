@@ -1,3 +1,0 @@
-#!/bin/bash
-
-vagrant box list | perl -wanl -e 'print $F[0]' | xargs -I {} vagrant box update --box {} && vagrant box prune
