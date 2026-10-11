@@ -29,3 +29,5 @@ sudo update-alternatives --set editor /usr/bin/vim.basic
 
 gsettings set org.gnome.desktop.wm.preferences button-layout ":minimize,maximize,close"
 gsettings set org.gnome.desktop.wm.keybindings switch-windows "['<Alt>Tab']"
+
+dconf write /org/gnome/desktop/input-sources/xkb-options "['ctrl:swapcaps', 'caps:ctrl_modifier']"
