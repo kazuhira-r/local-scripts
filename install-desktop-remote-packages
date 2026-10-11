@@ -5,7 +5,26 @@ SCRIPT_DIR=$(cd $(dirname $0); pwd)
 ${SCRIPT_DIR}/install-desktop-packages
 
 sudo apt install -y \
-  tigervnc-standalone-server \
+  winpr-utils \
   dbus-x11
 
 gsettings set org.gnome.desktop.session idle-delay 0
+
+winpr-makecert -silent -rdp -path ~/.local/share/gnome-remote-desktop/certificates rdp-tls
+grdctl rdp set-tls-key ~/.local/share/gnome-remote-desktop/certificates/rdp-tls.key
+grdctl rdp set-tls-cert ~/.local/share/gnome-remote-desktop/certificates/rdp-tls.crt
+grdctl rdp enable
+grdctl rdp disable-view-only
+systemctl --user enable --now gnome-remote-desktop.service
+
+sudo -u gnome-remote-desktop bash -c 'winpr-makecert -silent -rdp -path /var/lib/gnome-remote-desktop/.local/share/gnome-remote-desktop/certificates rdp-tls'
+sudo grdctl --system rdp set-tls-key /var/lib/gnome-remote-desktop/.local/share/gnome-remote-desktop/certificates/rdp-tls.key
+sudo grdctl --system rdp set-tls-cert /var/lib/gnome-remote-desktop/.local/share/gnome-remote-desktop/certificates/rdp-tls.crt
+sudo grdctl --system rdp enable
+sudo systemctl enable --now gdm.service
+sudo systemctl enable --now gnome-remote-desktop.service
+
+echo
+echo "Please, grdctl rdp set-credentials and set an OS user's credential if necessary"
+echo 'grdctl rdp set-credentials'
+echo 'sudo grdctl --system rdp set-credentials'
