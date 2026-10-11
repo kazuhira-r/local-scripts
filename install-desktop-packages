@@ -13,6 +13,7 @@ sudo DEBIAN_FRONTEND=noninteractive apt install -y \
   tmux \
   emacs \
   fonts-cascadia-code \
+  fonts-jetbrains-mono \
   xclip \
   xsel
 
